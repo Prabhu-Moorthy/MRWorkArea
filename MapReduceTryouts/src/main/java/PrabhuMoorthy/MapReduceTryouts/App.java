@@ -1,4 +1,4 @@
-package MapReduceTryouts.PrabhuMoorthy;
+package PrabhuMoorthy.MapReduceTryouts;
 
 /**
  * Hello world!

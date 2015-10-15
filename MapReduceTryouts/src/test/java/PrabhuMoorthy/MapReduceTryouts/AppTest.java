@@ -1,4 +1,4 @@
-package MapReduceTryouts.PrabhuMoorthy;
+package PrabhuMoorthy.MapReduceTryouts;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

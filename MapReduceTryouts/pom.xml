@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>MapReduceTryouts</groupId>
-  <artifactId>PrabhuMoorthy</artifactId>
+  <groupId>PrabhuMoorthy</groupId>
+  <artifactId>MapReduceTryouts</artifactId>
   <version>1</version>
   <packaging>jar</packaging>
 
-  <name>PrabhuMoorthy</name>
+  <name>MapReduceTryouts</name>
   <url>http://maven.apache.org</url>
 
   <properties>
