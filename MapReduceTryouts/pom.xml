@@ -18,13 +18,20 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
     	<groupId>org.apache.hadoop</groupId>
     	<artifactId>hadoop-client</artifactId>
     	<version>2.7.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.mrunit</groupId>
+    	<artifactId>mrunit</artifactId>
+    	<version>1.1.0</version>
+    	<scope>test</scope>
+    	<classifier>hadoop2</classifier>
     </dependency>
   </dependencies>
 </project>
