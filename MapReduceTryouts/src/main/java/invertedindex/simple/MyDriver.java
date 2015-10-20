@@ -1,5 +1,6 @@
 package invertedindex.simple;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
@@ -13,7 +14,10 @@ public class MyDriver extends Configured implements Tool {
 
 	@Override
 	public int run(String[] args) throws Exception {
-		Job job = Job.getInstance();
+		
+		Configuration conf = getConf();
+		Job job = Job.getInstance(conf);
+		
 		job.setJarByClass(MyDriver.class);
 
 		Path outputPath =  new Path(args[1]);
@@ -28,7 +32,7 @@ public class MyDriver extends Configured implements Tool {
 		TextInputFormat.addInputPath(job, new Path(args[0]));
 		TextOutputFormat.setOutputPath(job, outputPath);
 		
-		//job.setNumReduceTasks(5);
+		//job.setNumReduceTasks(1);
 		
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
@@ -37,7 +41,8 @@ public class MyDriver extends Configured implements Tool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ToolRunner.run(new MyDriver(), args);
+		int exitCode = ToolRunner.run(new Configuration(),new MyDriver(), args);
+		System.exit(exitCode);
 	}
 
 }
