@@ -1,22 +1,21 @@
 package wordcount.sequencefile.input;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
-public class MyMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+public class MyMapper extends Mapper<Text, IntWritable, NullWritable, Text> {
 	static IntWritable ONE = new IntWritable(1);
 	@Override
-	protected void map(LongWritable key, Text value,Context context)
+	protected void map(Text key, IntWritable value,Context context)
 			throws IOException, InterruptedException {
-		StringTokenizer tokenizer = new StringTokenizer(value.toString());
-		while (tokenizer.hasMoreTokens()) {
-			context.write(new Text(tokenizer.nextToken()), ONE);
-		}
+		Text newValue = new Text();
+		String concatenatedVal = value.toString().concat("\t").concat(key.toString());
+		System.err.println(concatenatedVal);
+		NullWritable nullKey = NullWritable.get();
+		context.write(nullKey, newValue);
 	}
 }

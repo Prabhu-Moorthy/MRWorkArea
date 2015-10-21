@@ -3,11 +3,11 @@ package wordcount.sequencefile.input;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFilter;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
@@ -28,16 +28,15 @@ public class MyDriver extends Configured implements Tool {
 		job.setMapperClass(MyMapper.class);
 		job.setReducerClass(MyReducer.class);
 		
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(SequenceFileOutputFormat.class);
+		job.setMapOutputKeyClass(NullWritable.class);
+		job.setMapOutputValueClass(Text.class);
+		
+		job.setInputFormatClass(SequenceFileInputFilter.class);
+		job.setOutputFormatClass(TextOutputFormat.class);
 		
 		TextInputFormat.addInputPath(job, new Path(args[0]));
 		TextOutputFormat.setOutputPath(job, outputPath);
 		
-		//job.setNumReduceTasks(1);
-		
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
 		return job.waitForCompletion(true) ? 0 : 1;
 		
 	}

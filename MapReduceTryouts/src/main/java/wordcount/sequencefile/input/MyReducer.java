@@ -1,24 +1,21 @@
 package wordcount.sequencefile.input;
 
 import java.io.IOException;
-import java.util.Set;
-import java.util.TreeSet;
 
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class MyReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+public class MyReducer extends Reducer<NullWritable, Text, NullWritable, Text> {
 	enum customCounters{
 		POSITIVE
 	}
 	@Override
-	protected void reduce(Text key, Iterable<IntWritable> values,Context context)
+	protected void reduce(NullWritable key, Iterable<Text> values,Context context)
 			throws IOException, InterruptedException {
-		int sum = 0; 
-		for(IntWritable value:values){
-			sum+=value.get();
+		for(Text value:values){
+			context.write(key, value);
 		}
-		context.write(key, new IntWritable(sum));
+		
 	}
 }
