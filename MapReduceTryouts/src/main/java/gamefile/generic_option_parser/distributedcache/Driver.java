@@ -1,5 +1,6 @@
-package gamefile.distributedcache;
+package gamefile.generic_option_parser.distributedcache;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -19,10 +20,11 @@ import org.apache.hadoop.util.ToolRunner;
 public class Driver extends Configured implements Tool{
 
 	public int run(String[] args) throws Exception {
-		//Job1
+		Configuration conf = getConf();
+		
 
 		//Initilization
-		Job job1 = Job.getInstance();
+		Job job1 = Job.getInstance(conf);
 		Path gameFile = new Path(args[0]);
 		Path outputPath1 = new Path(args[1]);
 
@@ -48,7 +50,7 @@ public class Driver extends Configured implements Tool{
 	}
 
 	public static void main(String[] args) throws Exception {
-		ToolRunner.run(new Driver(), args);
+		ToolRunner.run(new Configuration(),new Driver(), args);
 	}
 
 }
