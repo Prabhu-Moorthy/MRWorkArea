@@ -1,0 +1,1 @@
+Wordcount which multiple outputs a sequence file and a text file
